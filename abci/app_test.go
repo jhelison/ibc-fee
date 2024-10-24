@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/cometbft/cometbft/abci/types"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"ibc-fee/abci"
 )
@@ -28,13 +28,13 @@ func TestConsensusPass(t *testing.T) {
 
 	// Assert the new height
 	currentState := app.GetState()
-	assert.Equal(t, int64(1), currentState.Height)
+	require.Equal(t, int64(1), currentState.Height)
 
 	// Assert that TXs exists
 	tx1Hash := abci.HashTx([]byte("tx1"))
-	assert.Equal(t, []byte("tx1"), currentState.Data[tx1Hash])
+	require.Equal(t, []byte("tx1"), currentState.Data[tx1Hash])
 	tx2Hash := abci.HashTx([]byte("tx2"))
-	assert.Equal(t, []byte("tx2"), currentState.Data[tx2Hash])
+	require.Equal(t, []byte("tx2"), currentState.Data[tx2Hash])
 }
 
 // TestFailedConsensus test a failed consensus by not reaching the vote threshold
@@ -56,10 +56,10 @@ func TestFailedConsensus(t *testing.T) {
 
 	// Assert that height remains the same
 	currentState := app.GetState()
-	assert.Equal(t, int64(0), currentState.Height)
+	require.Equal(t, int64(0), currentState.Height)
 
 	// The list of TXs must be empty
-	assert.Empty(t, currentState.Data)
+	require.Empty(t, currentState.Data)
 }
 
 // TestMixedConsensus test a passing consensus and them a failed consensus
@@ -99,12 +99,12 @@ func TestMixedConsensus(t *testing.T) {
 
 	// We should be on block 1
 	currentState := app.GetState()
-	assert.Equal(t, int64(1), currentState.Height)
+	require.Equal(t, int64(1), currentState.Height)
 
 	// Only one TX must exist and should be the passed one
-	assert.Equal(t, 1, len(currentState.Data))
+	require.Equal(t, 1, len(currentState.Data))
 	passingTxHash := abci.HashTx([]byte("passing_tx"))
-	assert.Equal(t, []byte("passing_tx"), currentState.Data[passingTxHash])
+	require.Equal(t, []byte("passing_tx"), currentState.Data[passingTxHash])
 }
 
 // voteOnApp is a helper function to test the voting process on the app
