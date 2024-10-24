@@ -12,7 +12,7 @@ DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace bu
 ##################################################################
 
 test-unit:
-	@go test -mod=readonly ./locking/... 
+	@go test -mod=readonly ./antehandler/... 
 
 ###############################################################################
 ###                                Linting                                  ###
