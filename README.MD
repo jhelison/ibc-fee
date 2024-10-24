@@ -4,6 +4,7 @@ This repository consists of multiple experiments and simulations related to Cosm
 - Antehandler
 - IBC packet broadcasting
 - ABCI interface implementation
+- Description of upgrades
 
 ## Projects
 
@@ -19,6 +20,8 @@ This is a general description of each:
   - Implements the ABCI interface into a simulated app
 - [IBC](./ibc/README.MD)
   - Implements packet handling into a simulated app
+- [Upgrades](./upgrades/README.MD)
+  - Has the general description of upgrades
 
 ## How to run this project
 
