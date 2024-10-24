@@ -31,7 +31,16 @@ func TestWeightedFeeAnte(t *testing.T) {
 		expectedFee sdk.Coins
 	}{
 		{
-			name: "No fee, single bank send message",
+			name: "No fee, ibc tx smaller than threshold",
+			msgs: []sdk.Msg{
+				&ibcclienttypes.MsgCreateClient{
+					Signer: accAddr1.String(),
+				},
+			},
+			expectedFee: nil,
+		},
+		{
+			name: "No fee, single bank send message at threshold limit",
 			msgs: []sdk.Msg{
 				banktyppes.NewMsgSend( // The fee handler has been set to have exactly this TX as limit
 					accAddr1,

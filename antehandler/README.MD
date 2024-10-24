@@ -21,3 +21,11 @@ Description of each file and it's purpose:
   - This is the implementation of the new antehandler
 - [Expected keepers](./weighted_fee_ante.go)
   - Definition of the interfaces used on the antehandler
+
+Tests:
+
+- Tests cover the following functionality:
+  - TXs smaller than the minimum threshold
+  - Txs bigger than the threshold
+- Tests can be found at:
+  - [Tests](./weighted_fee_ante_test.go)
